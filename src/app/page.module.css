@@ -4,7 +4,7 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  overflow-x: hidden; /* Prevents unwanted horizontal scrolling on mobile */
+  overflow-x: hidden;
 }
 
 .mainContent {
@@ -12,224 +12,94 @@
   flex: 1;
 }
 
-/* Fluid Container Padding */
 .container {
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 1rem; /* Compact 16px padding on mobile */
+  padding: 0 1.25rem; /* Slightly larger side padding on small screens */
+  box-sizing: border-box;
 }
 
-/* Scaled Vertical Section Spacing */
 .section {
-  padding: 3rem 0; /* Tightened from 5rem for mobile viewports */
+  padding: 3rem 0; /* Clean 48px top/bottom spacing on mobile */
 }
 
 .bgAlt {
   background-color: var(--bg-slate, #f8fafc);
 }
 
-/* Header Adjustments */
+/* Responsive Section Headers & Subheaders */
 .sectionHeader {
   text-align: center;
-  max-width: 600px;
-  margin: 0 auto 2rem auto; /* Lowered bottom margin */
+  max-width: 680px;
+  margin: 0 auto 2rem auto;
+  padding: 0 0.5rem;
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .subheading {
-  font-size: 0.75rem;
-  font-weight: 700;
-  color: var(--primary, #0d9488);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  display: block;
-  margin-bottom: 0.35rem;
-}
-
-.heading {
-  font-size: 1.625rem; /* Scaled down from 2.25rem for mobile */
-  line-height: 1.25;
-  font-weight: 800;
-  color: var(--text-dark, #0f172a);
-  letter-spacing: -0.02em;
-  margin-bottom: 0.5rem;
-}
-
-.description {
-  font-size: 0.875rem;
-  color: var(--text-muted, #64748b);
-  line-height: 1.5;
-}
-
-/* Grid Layouts with Defensive Gap Spacing */
-.servicesGrid, 
-.reviewsGrid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1.25rem; /* Reduced gap on mobile screens */
-  width: 100%;
-}
-
-.footer {
-  background-color: var(--text-dark, #0f172a);
-  color: var(--text-muted, #94a3b8);
-  text-align: center;
-  padding: 2rem 1rem;
-  margin-top: auto;
-  font-size: 0.875rem;
-}
-
-/* Drawer Component Styles */
-.expandedContent {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1.25rem;
-  align-items: center;
-  padding: 1.25rem;
-  margin-top: 1.25rem;
-  background-color: var(--bg-white, #ffffff);
-  border: 1px solid var(--border-light, #e2e8f0);
-  border-radius: var(--radius-lg, 12px);
-  box-shadow: 0 4px 16px -2px rgba(0, 0, 0, 0.05);
-}
-
-.imageWrapper {
-  position: relative;
-  width: 100%;
-  aspect-ratio: 16 / 9; /* 16:9 ratio takes up less screen height on mobile than 4:3 */
-  min-height: 180px;
-  border-radius: var(--radius-md, 8px);
-  overflow: hidden;
-  background-color: var(--border-light, #f1f5f9);
-}
-
-.detailImage {
-  object-fit: cover;
-  transition: transform 0.4s ease;
-}
-
-.detailText {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-
-.detailTitle {
+  display: inline-block;
   font-size: 0.75rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.08em;
   color: var(--primary, #0d9488);
+  margin-bottom: 0.5rem;
 }
 
-.extendedDescription {
-  font-size: 0.875rem;
-  color: var(--text-body, #334155);
-  line-height: 1.5;
-}
-
-.highlightList {
-  list-style: none;
-  padding: 0;
-  margin: 0.5rem 0 0 0;
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-
-.highlightItem {
-  font-size: 0.8125rem;
+.heading {
+  /* Fluid font size: scales smoothly between mobile (1.4rem) and desktop (2.25rem) */
+  font-size: clamp(1.4rem, 4vw, 2.25rem);
+  line-height: 1.25;
+  font-weight: 800;
   color: var(--text-dark, #0f172a);
-  display: flex;
-  align-items: flex-start;
-  gap: 0.5rem;
+  letter-spacing: -0.02em;
+  margin: 0 0 0.75rem 0;
+  
+  /* Forces long words to break cleanly on mobile */
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
-.checkDot {
-  color: var(--primary, #0d9488);
-  font-weight: bold;
-  flex-shrink: 0;
+.description {
+  font-size: clamp(0.875rem, 2vw, 1.05rem);
+  color: var(--text-muted, #64748b);
+  line-height: 1.6;
+  margin: 0;
+  max-width: 580px;
 }
 
-/* Desktop & Tablet Overrides */
-@media (min-width: 640px) {
-  .container {
-    padding: 0 1.5rem;
-  }
-
-  .section {
-    padding: 4rem 0;
-  }
-
-  .heading {
-    font-size: 2rem;
-  }
-
-  .description {
-    font-size: 1rem;
-  }
+/* Services Grid Layout (Responsive 1-Col Mobile, 2-Col Desktop) */
+.servicesGrid,
+.cardsGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  align-items: start; /* Stops sibling cards from stretching height */
+  width: 100%;
 }
 
+/* Tablet & Desktop Layout */
 @media (min-width: 768px) {
   .section {
-    padding: 5rem 0;
+    padding: 5rem 0; /* Generous 80px spacing on PC */
   }
 
   .sectionHeader {
-    margin-bottom: 3.5rem;
-  }
-
-  .heading {
-    font-size: 2.25rem;
+    margin-bottom: 3rem;
   }
 
   .subheading {
     font-size: 0.875rem;
   }
 
-  .servicesGrid, 
-  .reviewsGrid {
-    grid-template-columns: repeat(2, 1fr);
+  .servicesGrid,
+  .cardsGrid {
+    grid-template-columns: repeat(2, 1fr); /* Clean 2x2 grid on desktop */
     gap: 2rem;
-  }
-
-  .expandedContent {
-    grid-template-columns: 1fr 1fr;
-    padding: 2rem;
-    gap: 2.5rem;
-    margin-top: 2rem;
-  }
-
-  .imageWrapper {
-    aspect-ratio: 4 / 3;
-    min-height: 240px;
-  }
-
-  .detailText {
-    gap: 0.75rem;
-  }
-
-  .detailTitle {
-    font-size: 0.8125rem;
-  }
-
-  .extendedDescription,
-  .highlightItem {
-    font-size: 0.875rem;
-  }
-}
-
-@media (min-width: 1024px) {
-  .servicesGrid {
-    grid-template-columns: repeat(4, 1fr);
-  }
-  
-  .reviewsGrid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-
-  .expandedContent {
-    grid-template-columns: 1fr 1.2fr;
-    gap: 3rem;
   }
 }

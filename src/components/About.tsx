@@ -41,8 +41,14 @@ export default function About() {
   return (
     <section id="about" className={styles.aboutSection}>
       <div className={styles.container}>
+        {/* Header Block: Displayed at top on mobile, hidden on desktop */}
+        <div className={styles.mobileHeader}>
+          <span className={styles.subheading}>{aboutData.subheading}</span>
+          <h2 className={styles.heading}>{aboutData.heading}</h2>
+        </div>
+
         <div className={styles.grid}>
-          {/* Left Column: Visual & Quick Stats */}
+          {/* Visuals & Quick Stats */}
           <div className={styles.visualWrapper}>
             <div className={styles.imageContainer}>
               <Image
@@ -70,8 +76,12 @@ export default function About() {
 
           {/* Right Column: Copy & Highlights */}
           <div className={styles.content}>
-            <span className={styles.subheading}>{aboutData.subheading}</span>
-            <h2 className={styles.heading}>{aboutData.heading}</h2>
+            {/* Desktop Header: Hidden on mobile */}
+            <div className={styles.desktopHeader}>
+              <span className={styles.subheading}>{aboutData.subheading}</span>
+              <h2 className={styles.heading}>{aboutData.heading}</h2>
+            </div>
+
             <p className={styles.description}>{aboutData.description}</p>
 
             <div className={styles.featuresList}>
