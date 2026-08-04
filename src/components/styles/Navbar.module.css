@@ -46,7 +46,7 @@
   color: var(--primary, #0d9488);
 }
 
-/* Desktop Nav Hidden on Mobile */
+/* Desktop Nav Hidden on Mobile & Tablet */
 .desktopNav {
   display: none;
 }
@@ -58,6 +58,7 @@
   font-size: 0.925rem;
   padding: 0.5rem 0;
   transition: color 0.2s ease;
+  white-space: nowrap;
 }
 
 .navLink:hover {
@@ -86,6 +87,7 @@
   color: var(--text-dark, #0f172a);
   text-decoration: none;
   transition: color 0.2s ease;
+  white-space: nowrap;
 }
 
 .phoneLink:hover {
@@ -110,6 +112,7 @@
   box-shadow: 0 2px 4px rgba(13, 148, 136, 0.2);
   transition: background-color 0.2s ease;
   touch-action: manipulation;
+  white-space: nowrap; /* Prevents button text wrapping */
 }
 
 .btnPrimary:hover {
@@ -189,9 +192,46 @@
   padding: 0.75rem 0;
 }
 
-/* Media Queries */
-
+/* ==========================================================================
+   Tablet & Medium Screens (768px - 1023px)
+   ========================================================================== */
 @media (min-width: 768px) {
+  .container {
+    height: 72px;
+  }
+
+  .logoIcon {
+    width: 36px;
+    height: 36px;
+  }
+
+  .logo {
+    font-size: 1.35rem;
+  }
+
+  .actions {
+    gap: 1rem;
+  }
+
+  .phoneLink {
+    display: flex;
+    font-size: 0.8125rem;
+  }
+
+  .btnPrimary {
+    font-size: 0.8125rem;
+    padding: 0.5rem 1rem;
+  }
+
+  .mobileDrawer {
+    top: 72px;
+  }
+}
+
+/* ==========================================================================
+   Full Desktop (1024px+)
+   ========================================================================== */
+@media (min-width: 1024px) {
   .container {
     height: 80px;
   }
@@ -205,6 +245,7 @@
     font-size: 1.5rem;
   }
 
+  /* Reveal inline navigation links on desktop */
   .desktopNav {
     display: flex;
     align-items: center;
@@ -212,7 +253,7 @@
   }
 
   .phoneLink {
-    display: flex;
+    font-size: 0.875rem;
   }
 
   .btnPrimary {
@@ -220,6 +261,7 @@
     padding: 0.625rem 1.25rem;
   }
 
+  /* Hide mobile controls */
   .hamburger {
     display: none;
   }
