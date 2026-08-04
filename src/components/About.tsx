@@ -1,7 +1,41 @@
+'use client';
+
+import { useEffect, useRef } from 'react';
 import Image from 'next/image';
 import { Award, HeartPulse } from 'lucide-react';
-import { aboutData } from '@/data/landingData';
+import { useInView, useMotionValue, useSpring } from 'framer-motion';
+import { aboutData } from '@/data';
 import styles from './styles/About.module.css';
+
+function Counter({ value }: { value: string }) {
+  const ref = useRef<HTMLSpanElement>(null);
+
+  const numericValue = parseFloat(value.replace(/[^0-9.]/g, '')) || 0;
+  const suffix = value.replace(/[0-9.]/g, '');
+
+  const isInView = useInView(ref, { once: true, margin: '-50px' });
+  const count = useMotionValue(0);
+  const springValue = useSpring(count, {
+    damping: 30,
+    stiffness: 100,
+  });
+
+  useEffect(() => {
+    if (isInView) {
+      count.set(numericValue);
+    }
+  }, [isInView, count, numericValue]);
+
+  useEffect(() => {
+    return springValue.on('change', (latest) => {
+      if (ref.current) {
+        ref.current.textContent = `${Math.floor(latest)}${suffix}`;
+      }
+    });
+  }, [springValue, suffix]);
+
+  return <span ref={ref}>0{suffix}</span>;
+}
 
 export default function About() {
   return (
@@ -10,18 +44,24 @@ export default function About() {
         <div className={styles.grid}>
           {/* Left Column: Visual & Quick Stats */}
           <div className={styles.visualWrapper}>
-            <Image
-              src={aboutData.image.src}
-              alt={aboutData.image.alt}
-              width={aboutData.image.width ?? 800}
-              height={aboutData.image.height ?? 600}
-              className={styles.roundedImg}
-            />
+            <div className={styles.imageContainer}>
+              <Image
+                src={aboutData.image.src}
+                alt={aboutData.image.alt}
+                width={aboutData.image.width ?? 800}
+                height={aboutData.image.height ?? 600}
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px"
+                className={styles.roundedImg}
+                priority
+              />
+            </div>
 
             <div className={styles.statsBadgeGrid}>
               {aboutData.stats.map((stat, i) => (
                 <div key={i} className={styles.statCard}>
-                  <span className={styles.statValue}>{stat.value}</span>
+                  <span className={styles.statValue}>
+                    <Counter value={stat.value} />
+                  </span>
                   <span className={styles.statLabel}>{stat.label}</span>
                 </div>
               ))}
@@ -40,7 +80,7 @@ export default function About() {
                   <div className={styles.featureIcon}>
                     {idx === 0 ? <Award size={22} /> : <HeartPulse size={22} />}
                   </div>
-                  <div>
+                  <div className={styles.featureText}>
                     <h3 className={styles.featureTitle}>{feature.title}</h3>
                     <p className={styles.featureDesc}>{feature.description}</p>
                   </div>

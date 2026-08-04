@@ -1,0 +1,250 @@
+.footer {
+  background-color: var(--text-dark, #0f172a);
+  color: #94a3b8;
+  padding-top: 3rem;
+  padding-bottom: 2rem;
+  border-top: 1px solid #1e293b;
+  width: 100%;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.25rem;
+  width: 100%;
+}
+
+/* Base Mobile Layout: Single stacked column for clean reading */
+.grid {
+  display: flex;
+  flex-direction: column;
+  gap: 2.25rem;
+  margin-bottom: 2.5rem;
+}
+
+/* Brand Column */
+.brandCol {
+  display: flex;
+  flex-direction: column;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  color: #ffffff;
+  margin-bottom: 0.75rem;
+}
+
+.logoIcon {
+  color: var(--primary, #0d9488);
+}
+
+.logoText {
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.tagline {
+  font-size: 0.875rem;
+  line-height: 1.6;
+  margin-bottom: 1.25rem;
+  max-width: 320px;
+}
+
+.socials {
+  display: flex;
+  gap: 0.75rem;
+}
+
+/* High touch-target social buttons (42x42px standard) */
+.socialIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background-color: #1e293b;
+  color: #cbd5e1;
+  transition: all 0.2s ease;
+  touch-action: manipulation;
+}
+
+.socialIcon:hover {
+  background-color: var(--primary, #0d9488);
+  color: #ffffff;
+  transform: translateY(-2px);
+}
+
+/* Generic Column Wrapper */
+.col {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Column Headers */
+.colTitle {
+  color: #ffffff;
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  line-height: 1.2;
+}
+
+/* Lists & Links with Touch Spacing */
+.linkList,
+.contactList,
+.hoursList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  font-size: 0.875rem;
+}
+
+.navLink {
+  color: #94a3b8;
+  text-decoration: none;
+  display: inline-block;
+  padding: 0.2rem 0; /* Expanded touch zone */
+  transition: color 0.2s ease;
+}
+
+.navLink:hover {
+  color: var(--primary, #0d9488);
+}
+
+.contactList li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  line-height: 1.5;
+}
+
+.contactList a {
+  color: #94a3b8;
+  text-decoration: none;
+  transition: color 0.2s ease;
+  word-break: break-word; /* Prevents long emails from breaking mobile screen bounds */
+}
+
+.contactList a:hover {
+  color: #ffffff;
+}
+
+.infoIcon {
+  color: var(--primary, #0d9488);
+  flex-shrink: 0;
+  margin-top: 0.2rem;
+}
+
+.hourRow {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+}
+
+.dayLabel {
+  font-weight: 600;
+  color: #cbd5e1;
+}
+
+.timeLabel {
+  color: #94a3b8;
+}
+
+/* Map Column & Aspect Ratio */
+.mapCol {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.mapWrapper {
+  width: 100%;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid #334155;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  transition: border-color 0.2s ease;
+  height: 160px; /* Fixed height for mobile to prevent scroll locking */
+}
+
+.mapWrapper:hover {
+  border-color: var(--primary, #0d9488);
+}
+
+.mapFrame {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  filter: grayscale(20%) contrast(90%);
+}
+
+/* Bottom Bar */
+.bottomBar {
+  padding-top: 1.75rem;
+  border-top: 1px solid #1e293b;
+  text-align: center;
+  font-size: 0.8125rem;
+  color: #64748b;
+  line-height: 1.5;
+}
+
+/* Responsive Media Queries */
+
+/* Small Tablets (2-column layout) */
+@media (min-width: 576px) {
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2.5rem 2rem;
+  }
+
+  .brandCol {
+    grid-column: span 2;
+  }
+
+  .mapCol {
+    grid-column: span 2;
+  }
+
+  .mapWrapper {
+    height: 180px;
+  }
+}
+
+/* Desktop & Large Screens (5-column layout) */
+@media (min-width: 992px) {
+  .footer {
+    padding-top: 4rem;
+  }
+
+  .grid {
+    grid-template-columns: 1.2fr 0.8fr 1fr 1.1fr 1.2fr;
+    gap: 2rem;
+    margin-bottom: 3.5rem;
+    align-items: flex-start;
+  }
+
+  .brandCol {
+    grid-column: span 1;
+  }
+
+  .mapCol {
+    grid-column: span 1;
+  }
+
+  .mapWrapper {
+    height: 130px;
+  }
+
+  .socialIcon {
+    width: 38px;
+    height: 38px;
+  }
+}

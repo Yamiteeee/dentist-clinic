@@ -1,62 +1,221 @@
+/* Page Layout Core */
 .pageWrapper {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  width: 100%;
+  overflow-x: hidden; /* Prevents unwanted horizontal scrolling on mobile */
 }
 
+.mainContent {
+  width: 100%;
+  flex: 1;
+}
+
+/* Fluid Container Padding */
 .container {
+  width: 100%;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 1.5rem;
+  padding: 0 1rem; /* Compact 16px padding on mobile */
 }
 
+/* Scaled Vertical Section Spacing */
 .section {
-  padding: 5rem 0;
+  padding: 3rem 0; /* Tightened from 5rem for mobile viewports */
 }
 
 .bgAlt {
-  background-color: var(--bg-slate);
+  background-color: var(--bg-slate, #f8fafc);
 }
 
+/* Header Adjustments */
 .sectionHeader {
   text-align: center;
   max-width: 600px;
-  margin: 0 auto 3.5rem auto;
+  margin: 0 auto 2rem auto; /* Lowered bottom margin */
 }
 
 .subheading {
-  font-size: 0.875rem;
+  font-size: 0.75rem;
   font-weight: 700;
-  color: var(--primary);
+  color: var(--primary, #0d9488);
   text-transform: uppercase;
   letter-spacing: 0.05em;
   display: block;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.35rem;
 }
 
 .heading {
-  font-size: 2.25rem;
+  font-size: 1.625rem; /* Scaled down from 2.25rem for mobile */
+  line-height: 1.25;
   font-weight: 800;
-  color: var(--text-dark);
+  color: var(--text-dark, #0f172a);
   letter-spacing: -0.02em;
-  margin-bottom: 0.75rem;
+  margin-bottom: 0.5rem;
 }
 
 .description {
-  font-size: 1rem;
-  color: var(--text-muted);
-  line-height: 1.6;
+  font-size: 0.875rem;
+  color: var(--text-muted, #64748b);
+  line-height: 1.5;
 }
 
-.servicesGrid, .reviewsGrid {
+/* Grid Layouts with Defensive Gap Spacing */
+.servicesGrid, 
+.reviewsGrid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 2rem;
+  gap: 1.25rem; /* Reduced gap on mobile screens */
+  width: 100%;
+}
+
+.footer {
+  background-color: var(--text-dark, #0f172a);
+  color: var(--text-muted, #94a3b8);
+  text-align: center;
+  padding: 2rem 1rem;
+  margin-top: auto;
+  font-size: 0.875rem;
+}
+
+/* Drawer Component Styles */
+.expandedContent {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+  align-items: center;
+  padding: 1.25rem;
+  margin-top: 1.25rem;
+  background-color: var(--bg-white, #ffffff);
+  border: 1px solid var(--border-light, #e2e8f0);
+  border-radius: var(--radius-lg, 12px);
+  box-shadow: 0 4px 16px -2px rgba(0, 0, 0, 0.05);
+}
+
+.imageWrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9; /* 16:9 ratio takes up less screen height on mobile than 4:3 */
+  min-height: 180px;
+  border-radius: var(--radius-md, 8px);
+  overflow: hidden;
+  background-color: var(--border-light, #f1f5f9);
+}
+
+.detailImage {
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.detailText {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.detailTitle {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--primary, #0d9488);
+}
+
+.extendedDescription {
+  font-size: 0.875rem;
+  color: var(--text-body, #334155);
+  line-height: 1.5;
+}
+
+.highlightList {
+  list-style: none;
+  padding: 0;
+  margin: 0.5rem 0 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.highlightItem {
+  font-size: 0.8125rem;
+  color: var(--text-dark, #0f172a);
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+.checkDot {
+  color: var(--primary, #0d9488);
+  font-weight: bold;
+  flex-shrink: 0;
+}
+
+/* Desktop & Tablet Overrides */
+@media (min-width: 640px) {
+  .container {
+    padding: 0 1.5rem;
+  }
+
+  .section {
+    padding: 4rem 0;
+  }
+
+  .heading {
+    font-size: 2rem;
+  }
+
+  .description {
+    font-size: 1rem;
+  }
 }
 
 @media (min-width: 768px) {
-  .servicesGrid, .reviewsGrid {
+  .section {
+    padding: 5rem 0;
+  }
+
+  .sectionHeader {
+    margin-bottom: 3.5rem;
+  }
+
+  .heading {
+    font-size: 2.25rem;
+  }
+
+  .subheading {
+    font-size: 0.875rem;
+  }
+
+  .servicesGrid, 
+  .reviewsGrid {
     grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+  }
+
+  .expandedContent {
+    grid-template-columns: 1fr 1fr;
+    padding: 2rem;
+    gap: 2.5rem;
+    margin-top: 2rem;
+  }
+
+  .imageWrapper {
+    aspect-ratio: 4 / 3;
+    min-height: 240px;
+  }
+
+  .detailText {
+    gap: 0.75rem;
+  }
+
+  .detailTitle {
+    font-size: 0.8125rem;
+  }
+
+  .extendedDescription,
+  .highlightItem {
+    font-size: 0.875rem;
   }
 }
 
@@ -64,16 +223,13 @@
   .servicesGrid {
     grid-template-columns: repeat(4, 1fr);
   }
+  
   .reviewsGrid {
     grid-template-columns: repeat(3, 1fr);
   }
-}
 
-.footer {
-  background-color: var(--text-dark);
-  color: var(--text-muted);
-  text-align: center;
-  padding: 2.5rem 0;
-  margin-top: auto;
-  font-size: 0.875rem;
+  .expandedContent {
+    grid-template-columns: 1fr 1.2fr;
+    gap: 3rem;
+  }
 }
